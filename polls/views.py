@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse,Http404
+from django.shortcuts import render,get_object_or_404
+from django.http import HttpResponse
 # import model 
 from .models import Question
 # Create your views here.
@@ -15,10 +15,19 @@ def index(request):
     return render(request,'polls/index.html',context)
 
 def detail(request,question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    """
+        A shortcut: get_object_or_404()
+        It’s a very common idiom to use get() and raise Http404 if the object doesn’t exist. Django provides a shortcut. Here’s the detail() view, rewritten:
+        so this code
+        try:
+            question = Question.objects.get(pk=question_id)
+        except Question.DoesNotExist:
+            raise Http404("Question does not exist")
+        return render(request,'polls/detail.html',{'question':question})
+
+        changed
+    """
+    question = get_object_or_404(Question,pk=question_id)
     return render(request,'polls/detail.html',{'question':question})
 
 
