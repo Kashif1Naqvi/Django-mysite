@@ -15,18 +15,7 @@ def index(request):
     return render(request,'polls/index.html',context)
 
 def detail(request,question_id):
-    """
-        A shortcut: get_object_or_404()
-        It’s a very common idiom to use get() and raise Http404 if the object doesn’t exist. Django provides a shortcut. Here’s the detail() view, rewritten:
-        so this code
-        try:
-            question = Question.objects.get(pk=question_id)
-        except Question.DoesNotExist:
-            raise Http404("Question does not exist")
-        return render(request,'polls/detail.html',{'question':question})
-
-        changed
-    """
+    
     question = get_object_or_404(Question,pk=question_id)
     return render(request,'polls/detail.html',{'question':question})
 
@@ -38,3 +27,17 @@ def results(request,question_id):
 def vote(request,question_id):
     return HttpResponse("You're voting on question %s."%question_id)
 
+
+
+
+"""     in detail() function  get_object_or_404() used
+        It’s a very common idiom to use get() and raise Http404 if the object doesn’t exist. Django provides a shortcut. Here’s the detail() view, rewritten:
+        so this code
+        try:
+            question = Question.objects.get(pk=question_id)
+        except Question.DoesNotExist:
+            raise Http404("Question does not exist")
+        return render(request,'polls/detail.html',{'question':question})
+
+        changed
+    """
