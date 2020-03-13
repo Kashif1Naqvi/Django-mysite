@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-# if you have a more app then fix the app name also that route is equal to this app that we used
+# if you have a more app then fix the app name also that route is equal to this app that we used 
 app_name = 'polls'
 urlpatterns = [
     # /polls
