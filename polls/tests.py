@@ -65,3 +65,13 @@ class QuestionModelTests(TestCase):
             self.assertQuerysetEqual(
               responce.context['latest_question_list'],[]
             )
+        def test_future_question_and_past_question(self):
+            """
+              Even if both past and future question exists ,only past question is displayed
+            """
+            create_question(question_text="Past question",days=-30)
+            create_question(question_text="Future question",days=30)
+            responce = self.client.get(reverse('polls:index'))
+            self.assertQuerysetEqual(
+                responce.context['latest_question_list'],['<Question:Past question.>']
+            )
