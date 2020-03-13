@@ -17,13 +17,14 @@ class IndexView(generic.ListView):
         """ Return the five published questions """
         return Question.objects.order_by('-pub_date')[:5]
 
-
-    return render(request,'polls/detail.html',{'question':question})
-
-
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/details.html'
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
+
 
 def vote(request,question_id):
     question = get_object_or_404(Question,pk=question_id)
